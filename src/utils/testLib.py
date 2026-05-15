@@ -14,7 +14,7 @@ import os
 import json
 import numpy as np
 
-from utils.helpers import calculateFitness, buildCoverageMatrix
+from utils.helpers import calculateFitness, buildCoverageMatrix, buildOverlapMatrix
 from utils.testGen import loadInstance
 
 from algorithms.bruteForce import bruteForce
@@ -35,12 +35,13 @@ def test(strings: list[str], scale: str):
       fitnessListVnsW — lista fitness vrednosti po iteracijama (VNS weighted)
     """
     T, weights = buildCoverageMatrix(strings)
+    OV = buildOverlapMatrix(strings)
     result = {}
 
     # ---- Brute Force (samo za male instance) ----
     if scale == "small":
         startTime = time.perf_counter()
-        sol, fitness = bruteForce(strings, T)
+        sol, fitness = bruteForce(strings, T, OV)
         endTime = time.perf_counter()
         result["bruteForce"] = (sol, fitness[1], endTime - startTime, fitness[0] == 0)
 
@@ -51,13 +52,13 @@ def test(strings: list[str], scale: str):
         endTime = time.perf_counter()
         isFeasible = False
         if sol is not None:
-            fitness = calculateFitness(sol, strings)
+            fitness = calculateFitness(sol, strings, T, OV)
             isFeasible = fitness[0] == 0
         result["milp"] = (sol, value, endTime - startTime, isFeasible)
 
     # ---- Greedy ----
     startTime = time.perf_counter()
-    sol, fitness = greedy(strings, T)
+    sol, fitness = greedy(strings, T, OV)
     endTime = time.perf_counter()
     result["greedy"] = (sol, fitness[1], endTime - startTime, fitness[0] == 0)
 
@@ -70,29 +71,29 @@ def test(strings: list[str], scale: str):
         ga = GeneticAlgorithm(100, 140, 0.05, 0.1, 10)
 
     startTime = time.perf_counter()
-    sol, fitness, fitnessListGA = ga.solve(strings, T)
+    sol, fitness, fitnessListGA = ga.solve(strings, T, OV)
     endTime = time.perf_counter()
     result["genetic"] = (sol, fitness[1], endTime - startTime, fitness[0] == 0)
 
     # ---- VNS ----
     startTime = time.perf_counter()
     if scale == "small":
-        sol, fitness, fitnessListVns = vns(strings, T, 30, 1, 3, 0.05)
+        sol, fitness, fitnessListVns = vns(strings, T, 30, 1, 3, 0.05, OV=OV)
     elif scale == "medium":
-        sol, fitness, fitnessListVns = vns(strings, T, 50, 1, 8, 0.1)
+        sol, fitness, fitnessListVns = vns(strings, T, 50, 1, 8, 0.1, OV=OV)
     else:
-        sol, fitness, fitnessListVns = vns(strings, T, 80, 1, 12, 0.2)
+        sol, fitness, fitnessListVns = vns(strings, T, 80, 1, 12, 0.2, OV=OV)
     endTime = time.perf_counter()
     result["vns"] = (sol, fitness[1], endTime - startTime, fitness[0] == 0)
 
     # ---- VNS Weighted ----
     startTime = time.perf_counter()
     if scale == "small":
-        sol, fitness, fitnessListVnsW = vns(strings, T, 30, 1, 3, 0.05, True, weights)
+        sol, fitness, fitnessListVnsW = vns(strings, T, 30, 1, 3, 0.05, True, weights, OV)
     elif scale == "medium":
-        sol, fitness, fitnessListVnsW = vns(strings, T, 50, 1, 8, 0.1, True, weights)
+        sol, fitness, fitnessListVnsW = vns(strings, T, 50, 1, 8, 0.1, True, weights, OV)
     else:
-        sol, fitness, fitnessListVnsW = vns(strings, T, 80, 1, 12, 0.2, True, weights)
+        sol, fitness, fitnessListVnsW = vns(strings, T, 80, 1, 12, 0.2, True, weights, OV)
     endTime = time.perf_counter()
     result["vnsWeighted"] = (sol, fitness[1], endTime - startTime, fitness[0] == 0)
 

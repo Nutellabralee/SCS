@@ -10,7 +10,7 @@ Strategija:
 from utils.helpers import calculateFitness
 
 
-def greedy(strings: list[str], T) -> tuple:
+def greedy(strings: list[str], T, OV=None) -> tuple:
     """
     Pohlepno resava SCS problem.
 
@@ -50,4 +50,4 @@ def greedy(strings: list[str], T) -> tuple:
         solution[bestIdx] = 1
         uncovered -= coverage[bestIdx]
 
-    return solution, calculateFitness(solution, strings)
+    return solution, calculateFitness(solution, strings, T, OV)

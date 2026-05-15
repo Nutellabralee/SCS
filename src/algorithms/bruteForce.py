@@ -12,7 +12,7 @@ from itertools import product
 from utils.helpers import calculateFitness
 
 
-def bruteForce(strings: list[str], T) -> tuple:
+def bruteForce(strings: list[str], T, OV=None) -> tuple:
     """
     Pronalazi optimalno resenje exhaustive pretragom.
 
@@ -33,7 +33,7 @@ def bruteForce(strings: list[str], T) -> tuple:
     bestFitness = (float('inf'), float('inf'))
 
     for sol in product(range(2), repeat=n):
-        fitness = calculateFitness(list(sol), strings)
+        fitness = calculateFitness(list(sol), strings, T, OV)
         if fitness < bestFitness:
             bestFitness = fitness
             bestSolution = list(sol)

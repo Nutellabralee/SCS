@@ -16,9 +16,10 @@ from utils.helpers import calculateFitness
 
 
 class Individual:
-    def __init__(self, strings: list[str], T, code=None):
+    def __init__(self, strings: list[str], T, OV=None, code=None):
         self.strings = strings
         self.T = T
+        self.OV = OV
         n = len(strings)
         if code is not None:
             self.code = np.array(code, dtype=int)
@@ -27,7 +28,7 @@ class Individual:
         self.fitness = self._calcFit()
 
     def _calcFit(self):
-        return calculateFitness(list(self.code), self.strings)
+        return calculateFitness(list(self.code), self.strings, self.T, self.OV)
 
     def __lt__(self, other):
         return self.fitness < other.fitness
@@ -75,13 +76,13 @@ class GeneticAlgorithm:
                 new_code[i] = 1 - new_code[i]
         return new_code
 
-    def solve(self, strings: list[str], T) -> tuple:
+    def solve(self, strings: list[str], T, OV=None) -> tuple:
         """
         Pokrece GA i vraca (solution, fitness, fitnessList).
 
         fitnessList — fitness najboljeg jedinke kroz generacije
         """
-        population = [Individual(strings, T) for _ in range(self.populationSize)]
+        population = [Individual(strings, T, OV) for _ in range(self.populationSize)]
         fitnessList = [min(population).fitness]
 
         for _ in range(self.numOfGenerations):
@@ -96,8 +97,8 @@ class GeneticAlgorithm:
                 c1_code = self._mutation(c1_code)
                 c2_code = self._mutation(c2_code)
 
-                child1 = Individual(strings, T, code=c1_code)
-                child2 = Individual(strings, T, code=c2_code)
+                child1 = Individual(strings, T, OV, code=c1_code)
+                child2 = Individual(strings, T, OV, code=c2_code)
 
                 newPopulation.append(child1)
                 newPopulation.append(child2)

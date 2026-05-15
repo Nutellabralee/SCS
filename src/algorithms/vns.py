@@ -20,12 +20,12 @@ def localSearch(
     fitness,
     strings: list[str],
     weighted: bool = False,
-    weights: Optional[list] = None
+    weights: Optional[list] = None,
+    T=None,
+    OV=None,
 ):
     """
     First-improvement lokalna pretraga sa bit-flip operatorom.
-    Prolazi kroz gene u nasumicnom redosledu i prihvata prvi flip
-    koji poboljsava fitness.
     """
     improved = True
     while improved:
@@ -35,16 +35,16 @@ def localSearch(
         for i in indices:
             solution[i] = 1 - solution[i]
             if weighted and weights is not None:
-                newFitness = calculateWeightedFitness(solution, strings, weights)
+                newFitness = calculateWeightedFitness(solution, strings, weights, T, OV)
             else:
-                newFitness = calculateFitness(solution, strings)
+                newFitness = calculateFitness(solution, strings, T, OV)
 
             if newFitness < fitness:
                 fitness = newFitness
                 improved = True
                 break
             else:
-                solution[i] = 1 - solution[i]   # vrati flip
+                solution[i] = 1 - solution[i]
 
     return fitness
 
@@ -67,32 +67,19 @@ def vns(
     maxK: int,
     moveProb: float,
     weighted: bool = False,
-    weights: Optional[list] = None
+    weights: Optional[list] = None,
+    OV=None,
 ) -> tuple:
     """
     Pokrece VNS i vraca (solution, fitness, fitnessList).
-
-    Parametri
-    ---------
-    strings     : instanca problema
-    T           : matrica pokrivenosti
-    numOfIters  : broj iteracija
-    minK, maxK  : opseg jacine perturbacije
-    moveProb    : verovatnoca prihvatanja resenja iste kvalitete (diversifikacija)
-    weighted    : da li koristiti weighted fitness
-    weights     : tezine stringova (potrebno ako weighted=True)
-
-    Vraca
-    -----
-    (solution, fitness, fitnessList)
     """
     n = len(strings)
     solution = random.choices([0, 1], k=n)
 
     if weighted and weights is not None:
-        fitness = calculateWeightedFitness(solution, strings, weights)
+        fitness = calculateWeightedFitness(solution, strings, weights, T, OV)
     else:
-        fitness = calculateFitness(solution, strings)
+        fitness = calculateFitness(solution, strings, T, OV)
 
     fitnessList = [fitness]
 
@@ -101,11 +88,11 @@ def vns(
             newSolution = shaking(solution, k)
 
             if weighted and weights is not None:
-                newFitness = calculateWeightedFitness(newSolution, strings, weights)
+                newFitness = calculateWeightedFitness(newSolution, strings, weights, T, OV)
             else:
-                newFitness = calculateFitness(newSolution, strings)
+                newFitness = calculateFitness(newSolution, strings, T, OV)
 
-            newFitness = localSearch(newSolution, newFitness, strings, weighted, weights)
+            newFitness = localSearch(newSolution, newFitness, strings, weighted, weights, T, OV)
 
             if newFitness < fitness or (newFitness == fitness and random.random() < moveProb):
                 fitness = newFitness
