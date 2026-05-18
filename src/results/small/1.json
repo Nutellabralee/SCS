@@ -1,0 +1,41 @@
+{
+  "greedy": {
+    "solution": [
+      1,
+      1,
+      0,
+      1,
+      0,
+      1
+    ],
+    "value": 11,
+    "time": 5.945000003748646e-05,
+    "isFeasible": true
+  },
+  "genetic": {
+    "solution": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "value": 11,
+    "time": 0.06715524300000197,
+    "isFeasible": true
+  },
+  "vns": {
+    "solution": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "value": 11,
+    "time": 0.021007787000030476,
+    "isFeasible": true
+  }
+}
