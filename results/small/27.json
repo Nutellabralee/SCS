@@ -1,0 +1,68 @@
+{
+  "bruteForce": {
+    "solution": [
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "value": 14,
+    "time": 0.00027520000003278255,
+    "isFeasible": true
+  },
+  "milp": {
+    "solution": null,
+    "value": Infinity,
+    "time": 1.700012944638729e-06,
+    "isFeasible": false
+  },
+  "greedy": {
+    "solution": [
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "value": 14,
+    "time": 3.399999695830047e-05,
+    "isFeasible": true
+  },
+  "genetic": {
+    "solution": [
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "value": 14,
+    "time": 0.07030809999560006,
+    "isFeasible": true
+  },
+  "vns": {
+    "solution": [
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "value": 14,
+    "time": 0.01803400000790134,
+    "isFeasible": true
+  },
+  "vnsWeighted": {
+    "solution": [
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "value": 14,
+    "time": 0.021328700007870793,
+    "isFeasible": true
+  }
+}

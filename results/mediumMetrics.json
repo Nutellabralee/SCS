@@ -1,0 +1,32 @@
+{
+  "milp": {
+    "averageFitness": null,
+    "averageTime": 5.046668229624629e-06,
+    "percentOfFeasible": 0.0,
+    "percentOfOptimal": null
+  },
+  "greedy": {
+    "averageFitness": 106.46666666666667,
+    "averageTime": 0.0004055600011876474,
+    "percentOfFeasible": 100.0,
+    "percentOfOptimal": null
+  },
+  "genetic": {
+    "averageFitness": 106.4,
+    "averageTime": 1.4409311933326534,
+    "percentOfFeasible": 100.0,
+    "percentOfOptimal": null
+  },
+  "vns": {
+    "averageFitness": 106.4,
+    "averageTime": 0.8906386599953596,
+    "percentOfFeasible": 100.0,
+    "percentOfOptimal": null
+  },
+  "vnsWeighted": {
+    "averageFitness": 106.4,
+    "averageTime": 0.9148545266633543,
+    "percentOfFeasible": 100.0,
+    "percentOfOptimal": null
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "bruteForce": {
+    "averageFitness": 22.266666666666666,
+    "averageTime": 0.011910200000662978,
+    "percentOfFeasible": 100.0,
+    "percentOfOptimal": null
+  },
+  "milp": {
+    "averageFitness": null,
+    "averageTime": 4.0033337427303195e-06,
+    "percentOfFeasible": 0.0,
+    "percentOfOptimal": null
+  },
+  "greedy": {
+    "averageFitness": 22.266666666666666,
+    "averageTime": 8.006666515332957e-05,
+    "percentOfFeasible": 100.0,
+    "percentOfOptimal": null
+  },
+  "genetic": {
+    "averageFitness": 22.266666666666666,
+    "averageTime": 0.08782090999981544,
+    "percentOfFeasible": 100.0,
+    "percentOfOptimal": null
+  },
+  "vns": {
+    "averageFitness": 22.266666666666666,
+    "averageTime": 0.02259366333601065,
+    "percentOfFeasible": 100.0,
+    "percentOfOptimal": null
+  },
+  "vnsWeighted": {
+    "averageFitness": 22.266666666666666,
+    "averageTime": 0.02255372666695621,
+    "percentOfFeasible": 100.0,
+    "percentOfOptimal": null
+  }
+}

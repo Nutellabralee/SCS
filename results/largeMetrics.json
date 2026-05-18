@@ -1,0 +1,26 @@
+{
+  "greedy": {
+    "averageFitness": 546.6,
+    "averageTime": 0.004054239997640252,
+    "percentOfFeasible": 100.0,
+    "percentOfOptimal": null
+  },
+  "genetic": {
+    "averageFitness": 546.2,
+    "averageTime": 26.824395940010437,
+    "percentOfFeasible": 100.0,
+    "percentOfOptimal": null
+  },
+  "vns": {
+    "averageFitness": 546.2,
+    "averageTime": 31.60392039999715,
+    "percentOfFeasible": 100.0,
+    "percentOfOptimal": null
+  },
+  "vnsWeighted": {
+    "averageFitness": 546.2,
+    "averageTime": 38.3814832199947,
+    "percentOfFeasible": 100.0,
+    "percentOfOptimal": null
+  }
+}
